@@ -1,0 +1,10 @@
+name: 'Cloudflare Purge Cache Action'
+description: 'Purges cache on a cloudflare zone'
+author: 'GitHub'
+inputs:
+  apiKey:
+    description: 'Your Cloudflare API key'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
