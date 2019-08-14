@@ -1,6 +1,7 @@
 name: 'Cloudflare Purge Cache Action'
 description: 'Purges cache on a cloudflare zone'
 author: 'GitHub'
+icon: file-minus
 inputs:
   authToken:
     description: 'Your Cloudflare auth token'
