@@ -11,7 +11,7 @@ make sure you define specific files using the fileList arg (ALPHA. DO NOT USE IN
 ```yaml
     - name: Purge cache
       uses: 3stacks/cloudflare-purge-cache-action@1.0.1
-      env:
+      with:
         authToken: ${{ secrets.CLOUDFLARE_AUTH_TOKEN }}
         siteName: somesite.com
         authEmail: me@example.com
