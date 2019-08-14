@@ -5,7 +5,7 @@
     "axios": "^0.19.0"
   },
   "name": "cloudflare-purge-cache-action",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": "git@github.com:3stacks/cloudflare-purge-cache-action.git",
   "author": "Luke Boyle <me@lukeboyle.com>",
   "license": "MIT",
