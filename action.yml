@@ -4,8 +4,10 @@ author: 'GitHub'
 inputs:
   authToken:
     description: 'Your Cloudflare auth token'
-  zoneName:
+  siteName:
     description: 'The zone you wish to purge'
+  authEmail:
+    description: 'The admin email for this zone'
 
 runs:
   using: 'docker'
