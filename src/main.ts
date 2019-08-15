@@ -6,7 +6,8 @@ async function run() {
 		const authToken = core.getInput('authToken', { required: true });
 		const siteName = core.getInput('siteName', { required: true });
 		const authEmail = core.getInput('authEmail', { required: true });
-		const fileList = JSON.parse(core.getInput('fileList'));
+		const rawFileList = core.getInput('fileList');
+		const fileList = !!rawFileList ? JSON.parse(rawFileList) : [];
 
 		if (fileList.length > 0) {
 		    const areFilesValid = fileList.reduce((acc, curr) => {
