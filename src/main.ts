@@ -57,7 +57,6 @@ async function run() {
 		}
 		core.setFailed(`Purge ${siteName} cache fail!`);
 	} catch (error) {
-		console.log(error.response.data);
 		core.setFailed(error.response.data.errors[0].message);
 	}
 }
