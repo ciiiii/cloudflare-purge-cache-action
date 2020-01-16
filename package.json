@@ -13,8 +13,7 @@
   "scripts": {
     "build": "tsc",
     "format": "prettier --write **/*.ts",
-    "test": "jest",
-    "pre-commit": "npm run build"
+    "test": "yarn run build && node lib/main.js"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

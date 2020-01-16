@@ -5,6 +5,7 @@ COPY . .
 LABEL "com.github.actions.icon"="cloud"
 LABEL "com.github.actions.color"="orange"
 
-RUN npm install --production
+RUN yarn
+RUN yarn run build
 
 ENTRYPOINT ["node", "/lib/main.js"]

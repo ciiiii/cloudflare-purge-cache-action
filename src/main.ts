@@ -10,7 +10,6 @@ async function run() {
 		const authEmail = core.getInput('authEmail', { required: true });
 		const rawFileList = core.getInput('fileList');
 		const fileList = !!rawFileList ? JSON.parse(rawFileList) : [];
-
 		if (fileList.length > 0) {
 			const areFilesValid = fileList.reduce((acc, curr) => {
 				if (!acc) {
@@ -26,12 +25,24 @@ async function run() {
 			}
 		}
 		let zoneId = await getZoneID(authToken, authEmail, siteName);
+		if (zoneId.length === 0) {
+			return;
+		}
+		const renderBody = () => {
+			if (fileList.length === 0) {
+				return {
+					purge_everything: true
+				};
+			} else {
+				return {
+					files: fileList
+				};
+			}
+		};
+
 		let res = await axios.post(
 			`${baseUrl}/zones/${zoneId}/purge_cache`,
-			{
-				purge_everything: fileList.length === 0,
-				fileList: fileList.length === 0 ? undefined : fileList
-			},
+			renderBody(),
 			{
 				headers: {
 					Authorization: `Bearer ${authToken}`,
@@ -42,10 +53,12 @@ async function run() {
 		let { success } = res.data;
 		if (success) {
 			core.setOutput('res', `Purge ${siteName} cache success!`);
+			return;
 		}
 		core.setFailed(`Purge ${siteName} cache fail!`);
 	} catch (error) {
-		core.setFailed(error.message);
+		console.log(error.response.data);
+		core.setFailed(error.response.data.errors[0].message);
 	}
 }
 
@@ -66,8 +79,10 @@ async function getZoneID(
 			return result[0].id;
 		}
 		core.setFailed(`Query zoneId error, check your siteName: ${siteName}.`);
+		return '';
 	} catch (error) {
-		core.setFailed(error.message);
+		core.setFailed(error.response.data.errors[0].message);
+		return '';
 	}
 }
 

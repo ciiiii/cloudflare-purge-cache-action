@@ -1,0 +1,15 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test-action:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Purge cache
+        uses: ciiiii/cloudflare-purge-cache-action@master
+        with:
+          authToken: ${{ secrets.CLOUDFLARE_AUTH_TOKEN }}
+          siteName: ciii.tech
+          authEmail: allen.ccccnm@gmail.com
+          fileList: '["http://ciii.tech/index.html"]'
